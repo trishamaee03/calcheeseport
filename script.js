@@ -44,17 +44,23 @@
     workExperience: [],
     // RESUME LINK: a file name next to index.html ("resume.pdf") or a full link
     // such as a Google Drive share link ("https://drive.google.com/...").
-    resumeFile: "resume.pdf",
-    email: "enoretrishamae@gmail.com",       
-    phone: "09667148922",      
-    address: "Beata pandacan Manila",      
-    github: "https://github.com/trishamaee03",     
-   
+    resumeFile: "White and Black Simple Student CV Resume_20261011_002252_0000.pdf",
+    // ---- CONTACTS: type between the quotes. They show on the Contact
+    // ---- section AND Cal will share them. Leave "" to hide a field.
+    email: "",        // e.g. "yourname@gmail.com"
+    phone: "",        // e.g. "+63 900 000 0000"
+    address: "",      // e.g. "City, Philippines"
+    github: "",       // e.g. "https://github.com/yourusername"
+    linkedin: "",     // e.g. "https://linkedin.com/in/yourname"
+    portfolio: ""
   };
 
   const BOT_NAME = "Cal";
 
-  
+  /* =====================================================================
+     2) ADD YOUR OWN CHATBOT QUESTIONS AND ANSWERS HERE
+     "questions" = different ways someone might ask. "answer" = the reply.
+     ===================================================================== */
   const CUSTOM_FAQ = [
     // { questions: ["what is her favorite food", "fav food"], answer: "Her favorite food is ..." },
   ];
@@ -74,6 +80,8 @@
   const toggle = $("#navToggle");
   const menu = $("#navMenu");
 
+  // Spaces in file names are encoded so the link works on Netlify too.
+  const resumeUrl = () => /^https?:/i.test(PROFILE.resumeFile) ? PROFILE.resumeFile : encodeURI(PROFILE.resumeFile);
   const has = (v) => Array.isArray(v) ? v.length > 0 : !!(v && String(v).trim());
   const NA = (what) => "Sorry, " + what + " hasn't been provided yet, so I can't answer that.";
 
@@ -340,7 +348,7 @@
     text.split("{{resume}}").forEach((part, i) => {
       if (i > 0) {
         const a = document.createElement("a");
-        a.href = PROFILE.resumeFile;
+        a.href = resumeUrl();
         a.target = "_blank";
         a.rel = "noopener";
         a.textContent = "Open resume";
@@ -502,7 +510,7 @@
      ===================================================================== */
   document.querySelectorAll("[data-resume]").forEach((a) => {
     if (has(PROFILE.resumeFile)) {
-      a.href = PROFILE.resumeFile;
+      a.href = resumeUrl();
       a.target = "_blank";
       a.rel = "noopener";
     } else {
