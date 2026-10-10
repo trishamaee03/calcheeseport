@@ -48,11 +48,9 @@
     // ---- CONTACTS: type between the quotes. They show on the Contact
     // ---- section AND Cal will share them. Leave "" to hide a field.
     email: "trisha.enore.coi@pcu.edu.ph.com", // e.g. "yourname@gmail.com"
-    phone: "",        // e.g. "+63 900 000 0000"
-    address: "",      // e.g. "City, Philippines"
-    github: "",       // e.g. "https://github.com/yourusername"
-    linkedin: "",     // e.g. "https://linkedin.com/in/yourname"
-    portfolio: ""
+    phone: "09667148492",        // e.g. "+63 900 000 0000"
+    address: "Pandacan Manil",      // e.g. "City, Philippines"
+    github: https://github.com/trishamaee03"",       // e.g. "https://github.com/yourusername"
   };
 
   const BOT_NAME = "Cal";
