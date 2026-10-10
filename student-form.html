@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Student Registration — Sample Form</title>
+    <style>
+      :root {
+        --bg: #f6f5f3;
+        --card: #ffffff;
+        --accent: #c8b99a; /* pastel khaki */
+        --accent-2: #e6dfcf;
+        --muted: #8b8b8b;
+        --text: #222;
+        --shadow: 0 8px 20px rgba(23, 23, 23, 0.06);
+        --radius: 10px;
+        --field-radius: 6px;
+        --max-w: 820px;
+        font-family: "Inter", "Segoe UI", Roboto, Arial, sans-serif;
+      }
+
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        background: linear-gradient(180deg, var(--bg), #fbfbfb);
+        color: var(--text);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      .page {
+        min-height: 100%;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        padding: 48px 20px;
+      }
+
+      .brand {
+        text-align: center;
+        margin-bottom: 18px;
+      }
+
+      .brand img {
+        height: 66px;
+        object-fit: contain;
+      }
+
+      .brand h1 {
+        margin: 8px 0 0;
+        font-size: 22px;
+        letter-spacing: 1px;
+        color: #4b4b4b;
+      }
+
+      .card {
+        width: 100%;
+        max-width: var(--max-w);
+        background: var(--card);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 26px 34px;
+        box-sizing: border-box;
+        border-top: 6px solid var(--accent);
+      }
+
+      .section-title {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin: 6px 0 16px;
+      }
+      .section-title h2 {
+        margin: 0;
+        font-size: 16px;
+        color: #333;
+      }
+
+      form {
+        width: 100%;
+      }
+
+      .row {
+        display: flex;
+        gap: 18px;
+        flex-wrap: wrap;
+        margin-bottom: 12px;
+      }
+
+      .col {
+        flex: 1 1 200px;
+        min-width: 180px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      label {
+        font-size: 12px;
+        color: var(--muted);
+        margin-bottom: 6px;
+      }
+
+      input[type="text"],
+      input[type="email"],
+      input[type="tel"],
+      input[type="date"],
+      select,
+      textarea {
+        padding: 10px 12px;
+        border-radius: var(--field-radius);
+        border: 1px solid #e6e6e6;
+        background: #fff;
+        font-size: 14px;
+        box-sizing: border-box;
+        outline: none;
+        transition: box-shadow 0.12s, border-color 0.12s;
+      }
+
+      textarea {
+        min-height: 110px;
+        resize: vertical;
+      }
+
+      input:focus,
+      select:focus,
+      textarea:focus {
+        box-shadow: 0 1px 0 rgba(0, 0, 0, 0.02),
+          0 0 0 3px rgba(200, 185, 150, 0.08);
+        border-color: rgba(200, 185, 150, 0.6);
+      }
+
+      .small {
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .divider {
+        height: 1px;
+        background: #f0efef;
+        margin: 18px 0;
+      }
+
+      /* checkboxes list area */
+      .checkbox-list {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        padding: 10px 12px;
+        border-radius: 6px;
+        border: 1px solid #eee;
+        background: linear-gradient(180deg, #fff, #faf9f7);
+        max-height: 320px;
+        overflow: auto;
+      }
+
+      .check-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: 13px;
+        color: #333;
+      }
+
+      .legend {
+        font-weight: 600;
+        margin-bottom: 8px;
+      }
+
+      .actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        margin-top: 18px;
+      }
+
+      .btn {
+        border: 0;
+        padding: 10px 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        box-shadow: none;
+      }
+
+      .btn-ghost {
+        background: transparent;
+        color: #5b5b5b;
+        border: 1px solid #e6e6e6;
+      }
+
+      .btn-primary {
+        background: var(--accent);
+        color: #3c2e1f;
+      }
+
+      /* responsive tweaks */
+      @media (max-width: 720px) {
+        .row {
+          gap: 12px;
+        }
+        .card {
+          padding: 18px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div>
+        <div class="brand" aria-hidden="true">
+          <!-- small circular logo placeholder: replace src with actual logo -->
+          <img
+            src="https://upload.wikimedia.org/wikipedia/en/thumb/6/6a/Philippine_Christian_University_logo.png/250px-Philippine_Christian_University_logo.png"
+            alt=""
+          />
+          <h1>PHILIPPINE CHRISTIAN UNIVERSITY</h1>
+        </div>
+
+        <div class="card" role="region" aria-label="Student registration form">
+          <form id="studentForm" autocomplete="on" novalidate>
+            <!-- Personal Information -->
+            <div class="section-title">
+              <h2>Personal Information</h2>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <label for="surname">Surname</label>
+                <input
+                  id="surname"
+                  name="surname"
+                  type="text"
+                  placeholder="[SURNAME]"
+                />
+              </div>
+
+              <div class="col">
+                <label for="given">Given name</label>
+                <input
+                  id="given"
+                  name="given"
+                  type="text"
+                  placeholder="[GIVEN NAME]"
+                />
+              </div>
+
+              <div class="col" style="flex: 0 0 120px; min-width: 120px">
+                <label for="ext">Ext.</label>
+                <input
+                  id="ext"
+                  name="ext"
+                  type="text"
+                  placeholder="JR., SR., III"
+                />
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <label for="mname">Middle name</label>
+                <input
+                  id="mname"
+                  name="mname"
+                  type="text"
+                  placeholder="[OPTIONAL]"
+                />
+              </div>
+
+              <div class="col" style="flex: 0 0 80px; min-width: 80px">
+                <label for="mi">M.I.</label>
+                <input id="mi" name="mi" type="text" placeholder="M.I." />
+              </div>
+
+              <div class="col">
+                <label for="dob"
+                  >Date of Birth
+                  <span class="small">(ex: 01/20/1991)</span></label
+                >
+                <input id="dob" name="dob" type="date" />
+              </div>
+
+              <div class="col">
+                <label for="place">Place of Birth</label>
+                <input
+                  id="place"
+                  name="place"
+                  type="text"
+                  placeholder="Place of birth"
+                />
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col" style="min-width: 150px">
+                <label for="gender">Gender</label>
+                <select id="gender" name="gender">
+                  <option>MALE</option>
+                  <option>FEMALE</option>
+                  <option>OTHER</option>
+                </select>
+              </div>
+
+              <div class="col" style="min-width: 170px">
+                <label for="civil">Civil Status</label>
+                <select id="civil" name="civil">
+                  <option>Single</option>
+                  <option>Married</option>
+                  <option>Widowed</option>
+                  <option>Separated</option>
+                </select>
+              </div>
+
+              <div class="col" style="min-width: 120px">
+                <label for="birthrank">Birth Rank</label>
+                <select id="birthrank" name="birthrank">
+                  <option>1st</option>
+                  <option>2nd</option>
+                  <option>3rd</option>
+                  <option>4th</option>
+                  <option>5th+</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="divider" aria-hidden="true"></div>
+
+            <!-- Present Address -->
+            <div class="section-title">
+              <h2>Present Address</h2>
+            </div>
+
+            <div class="row">
+              <div class="col" style="flex-basis: 100%">
+                <label for="address">House No., Street Name</label>
+                <input
+                  id="address"
+                  name="address"
+                  type="text"
+                  placeholder="HOUSE NO., STREET NAME"
+                />
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <label for="country">Country</label>
+                <select id="country" name="country">
+                  <option value="PH" selected>PHILIPPINES</option>
+                  <option value="US">UNITED STATES</option>
+                  <option value="SG">SINGAPORE</option>
+                </select>
+              </div>
+
+              <div class="col">
+                <label for="province">Province / Region / State</label>
+                <select id="province" name="province">
+                  <option disabled selected>SELECT PROVINCE/REGION</option>
+                  <option>Metro Manila</option>
+                  <option>Cebu</option>
+                  <option>Davao</option>
+                </select>
+              </div>
+
+              <div class="col">
+                <label for="city">City</label>
+                <select id="city" name="city">
+                  <option disabled selected>SELECT CITY</option>
+                  <option>Quezon City</option>
+                  <option>Manila</option>
+                  <option>Mandaue</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <label for="barangay">Barangay</label>
+                <select id="barangay" name="barangay">
+                  <option disabled selected>SELECT BARANGAY</option>
+                  <option>Barangay 1</option>
+                  <option>Barangay 2</option>
+                </select>
+              </div>
+
+              <div class="col">
+                <label for="nationality">Nationality</label>
+                <select id="nationality" name="nationality">
+                  <option disabled selected>- Please Select -</option>
+                  <option>Filipino</option>
+                  <option>Other</option>
+                </select>
+              </div>
+
+              <div class="col">
+                <label for="religion">Religion</label>
+                <select id="religion" name="religion">
+                  <option disabled selected>- Select -</option>
+                  <option>Christian</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <label for="tel">Telephone Number</label>
+                <input
+                  id="tel"
+                  name="tel"
+                  type="tel"
+                  placeholder="(02) 1234-5678"
+                />
+              </div>
+
+              <div class="col">
+                <label for="mobile">Mobile Number</label>
+                <input
+                  id="mobile"
+                  name="mobile"
+                  type="tel"
+                  placeholder="09xx-xxx-xxxx"
+                />
+              </div>
+
+              <div class="col">
+                <label for="email">Email</label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholder="you@example.com"
+                />
+              </div>
+            </div>
+
+            <div class="divider" aria-hidden="true"></div>
+
+            <!-- Belongs To -->
+            <div class="section-title">
+              <h2>Belongs To</h2>
+            </div>
+
+            <div
+              class="checkbox-list"
+              role="group"
+              aria-label="Belongs To options"
+            >
+              <div class="check-item">
+                <input
+                  id="firstgen"
+                  type="checkbox"
+                  name="belongs[]"
+                  value="firstgen"
+                />
+                <label for="firstgen">First Generation Student</label>
+              </div>
+
+              <div class="check-item">
+                <input
+                  id="indigenous"
+                  type="checkbox"
+                  name="belongs[]"
+                  value="indigenous"
+                />
+                <label for="indigenous">Indigenous People</label>
+              </div>
+
+              <div class="check-item">
+                <input id="pwd" type="checkbox" name="belongs[]" value="pwd" />
+                <label for="pwd">Persons with Disabilities (PWD)</label>
+              </div>
+
+              <div class="check-item">
+                <input
+                  id="gida"
+                  type="checkbox"
+                  name="belongs[]"
+                  value="gida"
+                />
+                <label for="gida"
+                  >Geographically Isolated and Disadvantaged Areas
+                  (GIDAs)</label
+                >
+              </div>
+
+              <div class="check-item">
+                <input
+                  id="orphan"
+                  type="checkbox"
+                  name="belongs[]"
+                  value="orphan"
+                />
+                <label for="orphan">Orphan</label>
+              </div>
+
+              <div class="check-item">
+                <input id="pdl" type="checkbox" name="belongs[]" value="pdl" />
+                <label for="pdl"
+                  >Child of Person Deprived of Liberty (PDL)</label
+                >
+              </div>
+
+              <div class="check-item">
+                <input
+                  id="selfsupport"
+                  type="checkbox"
+                  name="belongs[]"
+                  value="selfsupport"
+                />
+                <label for="selfsupport">Self - Supporting Students</label>
+              </div>
+
+              <div class="check-item">
+                <input
+                  id="senior"
+                  type="checkbox"
+                  name="belongs[]"
+                  value="senior"
+                />
+                <label for="senior">Senior Citizen</label>
+              </div>
+
+              <div class="check-item">
+                <input
+                  id="rebel"
+                  type="checkbox"
+                  name="belongs[]"
+                  value="rebel"
+                />
+                <label for="rebel">Rebel Returnee</label>
+              </div>
+
+              <div class="check-item">
+                <input
+                  id="familyrebel"
+                  type="checkbox"
+                  name="belongs[]"
+                  value="familyrebel"
+                />
+                <label for="familyrebel">A Family of Rebel Returnee</label>
+              </div>
+
+              <div class="check-item">
+                <input
+                  id="singleparent"
+                  type="checkbox"
+                  name="belongs[]"
+                  value="singleparent"
+                />
+                <label for="singleparent">Single Parent</label>
+              </div>
+
+              <div class="check-item">
+                <input id="4ps" type="checkbox" name="belongs[]" value="4ps" />
+                <label for="4ps"
+                  >Pantawid Pamilyang Pilipino Program (4Ps)</label
+                >
+              </div>
+
+              <div class="check-item">
+                <input
+                  id="childsolo"
+                  type="checkbox"
+                  name="belongs[]"
+                  value="childsolo"
+                />
+                <label for="childsolo">Child of Solo Parent</label>
+              </div>
+
+              <div class="check-item">
+                <input
+                  id="subsist"
+                  type="checkbox"
+                  name="belongs[]"
+                  value="subsist"
+                />
+                <label for="subsist"
+                  >A Family of Subsistence Farmers or Fisherfolk</label
+                >
+              </div>
+
+              <div class="check-item">
+                <input
+                  id="athletic"
+                  type="checkbox"
+                  name="belongs[]"
+                  value="athletic"
+                />
+                <label for="athletic">Athletic</label>
+              </div>
+
+              <div class="check-item">
+                <input
+                  id="performer"
+                  type="checkbox"
+                  name="belongs[]"
+                  value="performer"
+                />
+                <label for="performer">Performer</label>
+              </div>
+            </div>
+
+            <p class="small" style="margin-top: 10px">
+              Reminder: Please check your registered email regularly for
+              updates.
+            </p>
+
+            <div class="actions">
+              <button type="button" class="btn btn-ghost" id="prevBtn">
+                ← Previous
+              </button>
+              <div style="display: flex; gap: 10px">
+                <button type="reset" class="btn btn-ghost">Reset</button>
+                <button type="submit" class="btn btn-primary">Next →</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // minimal JS: handle form submit and previous button
+      (function () {
+        const form = document.getElementById("studentForm");
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          // collect some values for demo / debug (remove or replace with real submit)
+          const data = new FormData(form);
+          const obj = {};
+          for (const [k, v] of data.entries()) {
+            // handle repeated checkboxes (belongs[]) -> simple array push
+            if (k === "belongs[]") {
+              if (!obj.belongs) obj.belongs = [];
+              obj.belongs.push(v);
+            } else {
+              obj[k] = v;
+            }
+          }
+          // For now show a quick confirmation. In production, send via fetch to your server.
+          alert("Form ready to submit. Preview in console.");
+          console.log("FORM DATA:", obj);
+        });
+
+        const prev = document.getElementById("prevBtn");
+        prev.addEventListener("click", function () {
+          // example behavior: scroll to top
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+      })();
+    </script>
+  </body>
+</html>
