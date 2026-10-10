@@ -42,10 +42,12 @@
     favorites: [],
     learningGoals: [],
     workExperience: [],
+    // RESUME LINK: a file name next to index.html ("resume.pdf") or a full link
+    // such as a Google Drive share link ("https://drive.google.com/...").
     resumeFile: "resume.pdf",
     // ---- CONTACTS: type between the quotes. They show on the Contact
     // ---- section AND Cal will share them. Leave "" to hide a field.
-    email: "Enoretrishamae@gmail.com",        // e.g. "yourname@gmail.com"
+    email: "",        // e.g. "yourname@gmail.com"
     phone: "",        // e.g. "+63 900 000 0000"
     address: "",      // e.g. "City, Philippines"
     github: "",       // e.g. "https://github.com/yourusername"
@@ -194,7 +196,7 @@
         : NA("her skills") },
     { id: "projects", k: ["project", "projects", "made", "built", "created", "multiplication", "student form", "work samples"],
       a: () => has(PROFILE.projects)
-        ? "Projects: " + PROFILE.projects.map((p) => p.name + (p.description ? " (" + p.description + ")" : "")).join(", ") + "."
+        ? "Projects: " + PROFILE.projects.map((p) => p.name + (p.description ? " (" + p.description + ")" : "")).join(", ") + ". You can open and try them in the Projects section."
         : NA("her projects") },
     { id: "ach", k: ["achievement", "achievements", "award", "awards", "honor", "honors", "dean", "lister", "accomplish", "recognition", "proud"],
       a: () => has(PROFILE.achievements)
@@ -222,8 +224,10 @@
       a: () => has(PROFILE.workExperience)
         ? "Work experience: " + PROFILE.workExperience.map((w) => [w.role, w.place, w.years, w.note].filter(has).join(", ")).join("; ") + "."
         : "No work experience has been provided yet." },
-    { id: "resume", k: ["resume", "curriculum"],
-      a: () => "Her resume file is " + PROFILE.resumeFile + ". If it isn't shown on the page yet, it hasn't been added." },
+    { id: "resume", k: ["resume", "curriculum", "pdf", "download resume"],
+      a: () => has(PROFILE.resumeFile)
+        ? "Here is her resume (PDF): {{resume}}\nYou can also use the Resume button on this page."
+        : "Her resume hasn't been provided yet." },
     { id: "email", g: "c", k: ["email", "mail", "gmail", "e-mail"],
       a: () => has(PROFILE.email) ? "Email: " + PROFILE.email : "Her email hasn't been provided yet." },
     { id: "phone", g: "c", k: ["phone", "number", "mobile", "cellphone", "cell", "telephone", "call", "text her"],
@@ -339,7 +343,17 @@
   function addMsg(text, cls) {
     const m = document.createElement("div");
     m.className = "msg " + cls;
-    m.appendChild(document.createTextNode(text));
+    text.split("{{resume}}").forEach((part, i) => {
+      if (i > 0) {
+        const a = document.createElement("a");
+        a.href = PROFILE.resumeFile;
+        a.target = "_blank";
+        a.rel = "noopener";
+        a.textContent = "Open resume";
+        m.appendChild(a);
+      }
+      m.appendChild(document.createTextNode(part));
+    });
     if (cls !== "err") {
       const meta = document.createElement("div");
       meta.textContent = (cls === "user" ? "You" : BOT_NAME) + " · " + stamp();
@@ -488,6 +502,44 @@
       list.appendChild(li);
     });
   })();
+
+  /* =====================================================================
+     4c) RESUME LINKS + PROJECT VIEWER
+     ===================================================================== */
+  document.querySelectorAll("[data-resume]").forEach((a) => {
+    if (has(PROFILE.resumeFile)) {
+      a.href = PROFILE.resumeFile;
+      a.target = "_blank";
+      a.rel = "noopener";
+    } else {
+      a.hidden = true;
+    }
+  });
+
+  const modal = $("#projModal");
+  const frame = $("#projFrame");
+  const projTitle = $("#projTitle");
+
+  function openProject(src, title) {
+    projTitle.textContent = title || "Project";
+    frame.src = src;
+    modal.classList.add("open");
+    modal.setAttribute("aria-hidden", "false");
+  }
+  function closeProject() {
+    modal.classList.remove("open");
+    modal.setAttribute("aria-hidden", "true");
+    frame.src = "about:blank";
+  }
+  document.querySelectorAll("[data-src]").forEach((btn) =>
+    btn.addEventListener("click", () => openProject(btn.dataset.src, btn.dataset.title)));
+  if (modal) {
+    $("#projClose").addEventListener("click", closeProject);
+    modal.addEventListener("click", (e) => { if (e.target === modal) closeProject(); });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && modal.classList.contains("open")) closeProject();
+    });
+  }
 
   /* =====================================================================
      5) EXISTING SITE CODE (unchanged): mobile menu and footer year
