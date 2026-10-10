@@ -44,7 +44,7 @@
     workExperience: [],
     // RESUME LINK: a file name next to index.html ("resume.pdf") or a full link
     // such as a Google Drive share link ("https://drive.google.com/...").
-    resumeFile: "White and Black Simple Student CV Resume_20261011_002252_0000.pdf",
+    resumeFile: "resume.pdf",
     // ---- CONTACTS: type between the quotes. They show on the Contact
     // ---- section AND Cal will share them. Leave "" to hide a field.
     email: "",        // e.g. "yourname@gmail.com"
