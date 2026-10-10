@@ -45,22 +45,16 @@
     // RESUME LINK: a file name next to index.html ("resume.pdf") or a full link
     // such as a Google Drive share link ("https://drive.google.com/...").
     resumeFile: "resume.pdf",
-    // ---- CONTACTS: type between the quotes. They show on the Contact
-    // ---- section AND Cal will share them. Leave "" to hide a field.
-    email: "",        // e.g. "yourname@gmail.com"
-    phone: "",        // e.g. "+63 900 000 0000"
-    address: "",      // e.g. "City, Philippines"
-    github: "",       // e.g. "https://github.com/yourusername"
-    linkedin: "",     // e.g. "https://linkedin.com/in/yourname"
-    portfolio: ""
+    email: "enoretrishamae@gmail.com",       
+    phone: "09667148922",      
+    address: "Beata pandacan Manila",      
+    github: "https://github.com/trishamaee03",     
+   
   };
 
   const BOT_NAME = "Cal";
 
-  /* =====================================================================
-     2) ADD YOUR OWN CHATBOT QUESTIONS AND ANSWERS HERE
-     "questions" = different ways someone might ask. "answer" = the reply.
-     ===================================================================== */
+  
   const CUSTOM_FAQ = [
     // { questions: ["what is her favorite food", "fav food"], answer: "Her favorite food is ..." },
   ];
