@@ -47,7 +47,7 @@
     resumeFile: "resume.pdf",
     // ---- CONTACTS: type between the quotes. They show on the Contact
     // ---- section AND Cal will share them. Leave "" to hide a field.
-    email: "",        // e.g. "yourname@gmail.com"
+    email: "trisha.enore.coi@pcu.edu.ph.com", // e.g. "yourname@gmail.com"
     phone: "",        // e.g. "+63 900 000 0000"
     address: "",      // e.g. "City, Philippines"
     github: "",       // e.g. "https://github.com/yourusername"
