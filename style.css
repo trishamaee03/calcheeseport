@@ -1,11 +1,11 @@
-:root{--bg:#faf8f7;--ink:#2a1620;--muted:#8b6f7a;--rose:#D162A4;--pink:#f5dce8;--coral:#D52D00;--burnt:#D52D00;--magenta:#A30262;--line:#e8dae2;--alt:rgba(209,98,164,.05);
+:root{--bg:#faf8f7;--ink:#2a1620;--muted:#8b6f7a;--rose:#D162A4;--pink:#f5dce8;--coral:#D52D00;--burnt:#D52D00;--magenta:#A30262;--line:#e8dae2;--alt:rgba(209,98,164,.08);
 /* lesbian flag: #D52D00 #EF7627 #FF9A56 #FFFFFF #D162A4 #B55690 #A30262 */
 --serif:"Cormorant Garamond",Georgia,serif;--sans:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif}
 *{box-sizing:border-box;margin:0}
 [hidden]{display:none!important}
 html{scroll-behavior:smooth;scroll-padding-top:72px}
 body{background:var(--bg);color:var(--ink);font:400 16px/1.7 var(--sans);-webkit-font-smoothing:antialiased}
-body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background-image:radial-gradient(circle at 10% 10%,rgba(209,98,164,.12) 0%,transparent 42%),radial-gradient(circle at 90% 90%,rgba(163,2,98,.08) 0%,transparent 50%);background-attachment:fixed}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background-image:radial-gradient(circle at 10% 10%,rgba(213,45,0,.15) 0%,transparent 45%),radial-gradient(circle at 90% 90%,rgba(209,98,164,.18) 0%,transparent 48%);background-attachment:fixed}
 a{color:inherit}
 :focus-visible{outline:2px solid var(--coral);outline-offset:3px;border-radius:3px}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
